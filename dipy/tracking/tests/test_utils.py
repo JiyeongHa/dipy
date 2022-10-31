@@ -46,6 +46,23 @@ def test_density_map():
     dm = density_map(streamlines, np.eye(4), shape)
     npt.assert_array_equal(dm, expected)
 
+    # endpoint density map
+    streamlines = [np.array([np.arange(10)] * 3).T]
+    shape = (10, 10, 10)
+    x = np.asarray([0, 9])
+    expected = np.zeros(shape)
+    expected[x, x, x] = 1.
+    dm = density_map(streamlines, np.eye(4), shape, endpoints=True)
+    npt.assert_array_equal(dm, expected)
+
+    # endpoint density map - when streamlines only have one coordinate
+    streamlines = [np.array([[3, 3, 3]])]
+    shape = (10, 10, 10)
+    expected = np.zeros(shape)
+    expected[3, 3, 3] = 1.
+    dm = density_map(streamlines, np.eye(4), shape, endpoints=True)
+    npt.assert_array_equal(dm, expected)
+
     # add streamline, make voxel_size smaller. Each streamline should only be
     # counted once, even if multiple points lie in a voxel
     streamlines.append(np.ones((5, 3)))
