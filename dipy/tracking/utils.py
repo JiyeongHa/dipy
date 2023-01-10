@@ -64,7 +64,7 @@ from dipy.tracking.vox2track import _streamlines_in_mask
 from dipy.tracking._utils import (_mapping_to_voxel, _to_voxel_coordinates)
 
 
-def density_map(streamlines, affine, vol_dims, endpoints=False):
+def density_map(streamlines, affine, vol_dims, endpoints=True):
     """Count the number of unique streamlines that pass through each voxel.
 
     Parameters
@@ -78,7 +78,7 @@ def density_map(streamlines, affine, vol_dims, endpoints=False):
         The shape of the volume to be returned containing the streamlines
         counts
     endpoints : Boolean, optional
-        If true, use only the endpoints of the streamlines (the default is False)
+        If true, use only the endpoints of the streamlines (the default is True)
     Returns
     -------
     image_volume : ndarray, shape=vol_dims
